@@ -8,7 +8,7 @@ use KuMEX\SDK\KuMEXApi;
 /**
  * Class Symbol
  * @package KuMEX\SDK\PublicApi
- * @see https://docs.KuMEX.com/#symbol
+ * @see https://docs.kucoin.com/futures/#symbol-2
  */
 class Symbol extends KuMEXApi
 {
@@ -54,6 +54,21 @@ class Symbol extends KuMEXApi
     public function getLevel3Snapshot($symbol)
     {
         $response = $this->call(Request::METHOD_GET, '/api/v1/level3/snapshot', compact('symbol'));
+        return $response->getApiData();
+    }
+
+    /**
+     * Get the snapshot details of a symbol.
+     *
+     * @param  string $symbol
+     * @return array
+     * @throws \KuMEX\SDK\Exceptions\BusinessException
+     * @throws \KuMEX\SDK\Exceptions\HttpException
+     * @throws \KuMEX\SDK\Exceptions\InvalidApiUriException
+     */
+    public function getV2Level3Snapshot($symbol)
+    {
+        $response = $this->call(Request::METHOD_GET, '/api/v2/level3/snapshot', compact('symbol'));
         return $response->getApiData();
     }
 
